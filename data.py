@@ -20,18 +20,22 @@ class Data:
         self.list[name] = Item_ammount(name)
 
     def get_data(self):
-        data = requests.get(URL).json()
+        data_for_page = requests.get(URL).json()
+        page = data_for_page["totalPages"]
 
-        for data in data["auctions"]:
-            bin = data["bin"]
-            if (bin != True):
-                continue
+        for pages in range(page):
+            datas = requests.get(f"{URL}?page={pages}").json()
 
-            name = data["item_name"]
-            if(not self.check_if_key_exists(name)):
-                self.add(name)
-            
-            price = data["starting_bid"]
-            uuid = data["uuid"]
-            self.list[name].add(uuid, price)
-   
+            for data in datas["auctions"]:
+                bin = data["bin"]
+                if (bin != True):
+                    continue
+
+                name = data["item_name"]
+                if(not self.check_if_key_exists(name)):
+                    self.add(name)
+                
+                price = data["starting_bid"]
+                uuid = data["uuid"]
+                self.list[name].add(uuid, price)
+    
