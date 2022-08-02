@@ -3,6 +3,7 @@ class Item:
         self.uuid = uuid
         self.price = price
 
+
 class Item_ammount:
     def __init__(self, name):
         self.items = []
@@ -21,7 +22,7 @@ class Item_ammount:
         length = 0
         old_prices = prices[0]
         for price in prices:
-            if(old_prices + int(round(old_prices * 0.2, 0)) < price):
+            if old_prices + int(round(old_prices * 0.2, 0)) < price:
                 break
             length += 1
             old_prices = price

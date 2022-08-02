@@ -1,4 +1,4 @@
-items ={}
+items = {}
 
 items["hans"] = "Hans"
 items["klaus"] = "Klaus"
