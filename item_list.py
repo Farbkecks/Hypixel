@@ -18,7 +18,13 @@ class Item_ammount:
             prices.append(i.price)
         prices.sort()
         average = 0
-        for i in prices:
-            average += i
-        average = average / len(prices)
+        length = 0
+        old_prices = prices[0]
+        for price in prices:
+            if(old_prices + int(round(old_prices * 0.2, 0)) < price):
+                break
+            length += 1
+            old_prices = price
+            average += price
+        average = average / length
         self.average = int(round(average, 0))
